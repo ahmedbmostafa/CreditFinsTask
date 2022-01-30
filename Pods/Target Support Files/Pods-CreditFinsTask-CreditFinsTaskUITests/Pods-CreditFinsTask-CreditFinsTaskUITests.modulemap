@@ -1,0 +1,6 @@
+framework module Pods_CreditFinsTask_CreditFinsTaskUITests {
+  umbrella header "Pods-CreditFinsTask-CreditFinsTaskUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
