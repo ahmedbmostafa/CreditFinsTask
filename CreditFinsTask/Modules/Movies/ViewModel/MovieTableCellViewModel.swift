@@ -23,13 +23,13 @@ struct MovieTableViewCellViewModel {
     }
 
     func saveMovie(movieId: String){
-        fetchFavoriteMovies(movieId: movieId) {
+        fetchFavouriteMovies(movieId: movieId) {
             saveToCoreData()
         }
     }
 
     func deleteMovie(movieId: String, completion: @escaping()->()){
-        localDataManagerImp.deleteObjectFromCD(entity: "FavoriteMovies", withID: movieId)
+        localDataManagerImp.deleteObjectFromCD(entity: "FavouriteMovies", withID: movieId)
         completion()
     }
     
@@ -41,13 +41,13 @@ struct MovieTableViewCellViewModel {
         localDataManagerImp.savePost(dataDic: dict)
     }
 
-    func fetchFavoriteMovies(movieId: String, completion: @escaping()->()) {
-        localDataManagerImp.retrieveFavoriteMovies { dataList in
+    func fetchFavouriteMovies(movieId: String, completion: @escaping()->()) {
+        localDataManagerImp.retrieveFavouriteMovies { dataList in
             if dataList.count > 0 {
                 dataList.forEach { data in
                     let id = data.id ?? ""
                     if id != movieId {
-                        localDataManagerImp.deleteObjectFromCD(entity: "FavoriteMovies", withID: movieId)
+                        localDataManagerImp.deleteObjectFromCD(entity: "FavouriteMovies", withID: movieId)
                         completion()
                     }
                 }

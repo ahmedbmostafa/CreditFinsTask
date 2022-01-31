@@ -1,5 +1,5 @@
 //
-//  FavoriteManager.swift
+//  FavouriteManager.swift
 //  CreditFinsTask
 //
 //  Created by ahmed mostafa on 28/01/2022.
@@ -9,17 +9,17 @@ import CoreData
 import UIKit
 
 protocol LocalDataManagerProtocol {
-    func retrieveFavoriteMovies(completion:@escaping ([FavoriteMovies])->())
+    func retrieveFavouriteMovies(completion:@escaping ([FavouriteMovies])->())
     func savePost(dataDic:[String:Any])
-    func deleteAllData(entity: String)
+//    func deleteAllData(entity: String)
     func deleteObjectFromCD (entity: String,withID: String)
 }
 
 class LocalDataManagerImp: LocalDataManagerProtocol{
 
-    func retrieveFavoriteMovies(completion:@escaping ([FavoriteMovies])->()){
+    func retrieveFavouriteMovies(completion:@escaping ([FavouriteMovies])->()){
         let managedOC = CoreDataStore.managedObjectContext
-        let request: NSFetchRequest<FavoriteMovies> = NSFetchRequest(entityName: "FavoriteMovies")
+        let request: NSFetchRequest<FavouriteMovies> = NSFetchRequest(entityName: "FavouriteMovies")
         do {
             let fetched = try managedOC!.fetch(request)
             completion(fetched)
@@ -30,11 +30,9 @@ class LocalDataManagerImp: LocalDataManagerProtocol{
 
     func savePost(dataDic:[String:Any])  {
         let managedOC = CoreDataStore.managedObjectContext
-        if let newData = NSEntityDescription.entity(forEntityName: "FavoriteMovies",in: managedOC!) {
-            let data = FavoriteMovies(entity: newData, insertInto: managedOC)
+        if let newData = NSEntityDescription.entity(forEntityName: "FavouriteMovies",in: managedOC!) {
+            let data = FavouriteMovies(entity: newData, insertInto: managedOC)
             data.id = dataDic["id"] as? String
-            data.title = dataDic["title"] as? String
-            data.imageUrl = dataDic["imageUrl"] as? String
             do {
                 try managedOC!.save()
             }catch let err {
@@ -43,16 +41,16 @@ class LocalDataManagerImp: LocalDataManagerProtocol{
         }
     }
 
-    func deleteAllData(entity: String) {
-        let managedOC = CoreDataStore.managedObjectContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-        let delQue = NSBatchDeleteRequest(fetchRequest: request)
-        do {
-            try managedOC!.execute(delQue)
-        }catch let err {
-            print(err)
-        }
-    }
+//    func deleteAllData(entity: String) {
+//        let managedOC = CoreDataStore.managedObjectContext
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+//        let delQue = NSBatchDeleteRequest(fetchRequest: request)
+//        do {
+//            try managedOC!.execute(delQue)
+//        }catch let err {
+//            print(err)
+//        }
+//    }
 
     func deleteObjectFromCD (entity: String,withID: String) {
         let managedOC = CoreDataStore.managedObjectContext

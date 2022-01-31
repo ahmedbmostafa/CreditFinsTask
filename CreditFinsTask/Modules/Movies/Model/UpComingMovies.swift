@@ -10,9 +10,9 @@ import Foundation
 struct UpComingMovies : Decodable {
 
     let results : [Movie]?
-    let page : Int
-    let totalResults : Int
-    let totalPages : Int
+    let page : Int?
+    let totalResults : Int?
+    let totalPages : Int?
 
     enum CodingKeys: String, CodingKey {
         case results = "results"

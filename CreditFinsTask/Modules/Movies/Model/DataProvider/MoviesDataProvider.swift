@@ -43,8 +43,8 @@ class MovieDataProviderImpl: MovieDataProviderProtocol {
                 case .success(let upcomingMovies):
                     guard let data = upcomingMovies else { return }
                     print(self.pageCount)
-                    self.pageCount = data.page + 1
-                    self.totalPages = data.totalPages
+                    self.pageCount = (data.page ?? 1) + 1
+                    self.totalPages = data.totalPages ?? 2
                     self.delegate?.onSuccess(data)
                 case .failure(let error):
                     self.delegate?.onFailure(error)

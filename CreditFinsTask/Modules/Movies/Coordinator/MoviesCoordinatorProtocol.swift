@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-protocol MoviesCoordinator {
+protocol MoviesCoordinatorProtocol {
     func navigateToMovieDetail(withMovie movie: Movie?)
 }
 
-class MoviesCoordinatorImpl: MoviesCoordinator {
+class MoviesCoordinatorImpl: MoviesCoordinatorProtocol {
     weak var view: UIViewController?
     var appFlowManager: AppFlowManager?
     init(view: UIViewController?) {

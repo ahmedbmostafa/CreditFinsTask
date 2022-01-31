@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-@objc(FavoriteMovies)
-public class FavoriteMovies: NSManagedObject {
+@objc(FavouriteMovies)
+public class FavouriteMovies: NSManagedObject {
 
 }

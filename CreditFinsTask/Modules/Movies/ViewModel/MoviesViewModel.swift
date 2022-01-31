@@ -12,6 +12,7 @@ typealias MoviesViewModelOutput = (MoviesViewModel.Output) -> ()
 
 protocol MoviesViewModelProtocol {
     var dataProvider: MovieDataProviderProtocol! { get }
+    var coordinator: MoviesCoordinatorProtocol! { get }
     var numberOfMovies: Int { get }
     var output: MoviesViewModelOutput? { get set }
     func getMovieListCellViewModel(index : Int) -> MovieTableViewCellViewModel
@@ -31,10 +32,10 @@ class MoviesViewModel: MoviesViewModelProtocol{
     }
 
     var dataProvider: MovieDataProviderProtocol!
-    var coordinator: MoviesCoordinator!
+    var coordinator: MoviesCoordinatorProtocol!
     var localDataManager: LocalDataManagerProtocol
 
-    init(withDataProvider movieListDataProvider: MovieDataProviderProtocol,andCoordinator movieCoordinator: MoviesCoordinator, localDataManager:LocalDataManagerProtocol) {
+    init(withDataProvider movieListDataProvider: MovieDataProviderProtocol,andCoordinator movieCoordinator: MoviesCoordinatorProtocol, localDataManager:LocalDataManagerProtocol) {
         self.dataProvider = movieListDataProvider
         self.coordinator = movieCoordinator
         self.localDataManager = localDataManager
@@ -91,7 +92,7 @@ class MoviesViewModel: MoviesViewModelProtocol{
 
     private func activateFilter(completion:@escaping(Bool)->()) {
         isFilteringActive = true
-        localDataManager.retrieveFavoriteMovies { dataList in
+        localDataManager.retrieveFavouriteMovies { dataList in
             if dataList.count > 0 {
                 for data in dataList {
                     let id = data.id ?? ""
